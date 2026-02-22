@@ -16,6 +16,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import HomePageHero from "@/components/pages/home/hero";
+import { projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,29 +83,7 @@ const stats = [
   { value: "$60B", label: "Global Spend", icon: TrendingUp },
 ];
 
-const projects = [
-  {
-    id: 1,
-    title: "Gulf Coast Chemical Expansion",
-    category: "Petrochemical",
-    location: "Texas, USA",
-    image: "/images/project-chemical.jpg",
-  },
-  {
-    id: 2,
-    title: "Midwest Refinery Upgrade",
-    category: "Oil & Gas",
-    location: "Illinois, USA",
-    image: "/images/project-refinery.jpg",
-  },
-  {
-    id: 3,
-    title: "Pipeline Infrastructure",
-    category: "Infrastructure",
-    location: "Multiple States",
-    image: "/images/project-pipeline.jpg",
-  },
-];
+
 
 interface HomeProps {
   onNavigate?: (path: string) => void;
@@ -325,7 +304,7 @@ export default function Home({ onNavigate }: HomeProps) {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {projects.slice(0,3).map((project) => (
               <button
                 key={project.id}
                 onClick={() => handleNavigate("/projects")}

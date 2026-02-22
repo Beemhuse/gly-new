@@ -90,7 +90,7 @@ export default function Careers() {
             </div>
             <div className="relative reveal-up">
               <div className="rounded-3xl overflow-hidden shadow-xl">
-                <img src="/images/hero-careers.jpg" alt="GLY Engineering Careers" className="w-full h-[400px] object-cover" />
+                <img src="/images/careers/team.jpg" alt="GLY Engineering Careers" className="w-full h-[400px] object-cover" />
               </div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-sky-200 rounded-2xl -z-10" />
             </div>
