@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -168,7 +169,7 @@ export default function Careers() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg text-amber-800 mb-2">Notice to Candidates on Recruitment</h3>
-                <p className="text-amber-700 text-sm leading-relaxed">GLY Engineering will never ask for payment during recruitment. All legitimate offers come from careers@glyengineering.com. Verify at +1 607-233-4438.</p>
+                <p className="text-amber-700 text-sm leading-relaxed">We are committed to upholding ethical hiring practices through our designated recruitment team overseeing the employment scheme. For further clarification regarding your job application, please contact or visit our Recruitment Team Unit at <Link to={'mailto:careers@glyengineering.com'} className="text-amber-700 underline">careers@glyengineering.com</Link>.</p>
               </div>
             </div>
           </div>
