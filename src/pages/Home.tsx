@@ -21,20 +21,18 @@ import { projects } from "@/data/projects";
 gsap.registerPlugin(ScrollTrigger);
 
 const brands = [
-  "ExxonMobil",
-  "Chevron",
-  "Shell",
-  "BP",
-  "TotalEnergies",
-  "Dow Chemical",
-  "DuPont",
-  "BASF",
-  "Linde",
-  "Air Products",
-  "Phillips 66",
-  "Marathon",
-  "Valero",
-  "ConocoPhillips",
+  "/images/home/exxonmobile.png",
+  "/images/home/chevron.png",
+  "/images/home/shell.webp",
+  "/images/home/bp.png",
+  "/images/home/total.svg",
+  "/images/home/dow.png",
+  "/images/home/dupont.png",
+  "/images/home/mc-dermott.webp",
+  "/images/home/dow.png",
+  "/images/home/petrobas.png",
+  "/images/home/phillips.png",
+  "/images/home/vinci.png",
 ];
 
 const capabilities = [
@@ -211,9 +209,7 @@ export default function Home({ onNavigate }: HomeProps) {
                 key={index}
                 className="flex-shrink-0 px-8 py-3 mx-3 bg-slate-50 rounded-full hover:bg-sky-50 transition-colors cursor-pointer group"
               >
-                <span className="font-semibold text-slate-400 group-hover:text-sky-500 transition-colors whitespace-nowrap">
-                  {brand}
-                </span>
+                <img src={brand} className="w-16 h-16 object-contain" />
               </div>
             ))}
           </div>
