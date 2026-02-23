@@ -72,7 +72,7 @@ export default function About({ onNavigate }: AboutProps) {
             </div>
             <div className="relative reveal-up">
               <div className="rounded-3xl overflow-hidden shadow-xl">
-                <img src="/images/hero-about.jpg" alt="GLY Engineering Team" className="w-full h-[400px] object-cover" />
+                <img src="/images/about/about-us.png" alt="GLY Engineering Team" className="w-full h-[400px] object-cover" />
               </div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-sky-200 rounded-2xl -z-10" />
               <div className="absolute -top-6 -left-6 w-24 h-24 bg-sky-100 rounded-2xl -z-10" />
@@ -112,7 +112,7 @@ export default function About({ onNavigate }: AboutProps) {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative order-2 lg:order-1 reveal-up">
               <div className="rounded-3xl overflow-hidden shadow-xl">
-                <img src="/images/hero-services.jpg" alt="GLY Engineering Services" className="w-full h-[400px] object-cover" />
+                <img src="/images/about/how.jpg" alt="GLY Engineering Services" className="w-full h-[400px] object-cover" />
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-sky-200 rounded-2xl -z-10" />
             </div>

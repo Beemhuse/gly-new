@@ -26,7 +26,7 @@ export const services = [
       "3D/4D Modeling",
       "Process Simulation",
     ],
-    image: "/images/services/fabrication.jpg",
+    image: "/images/services/design.png",
   },
   {
     id: "procurement",
@@ -42,7 +42,7 @@ export const services = [
       "Logistics Coordination",
       "Quality Assurance",
     ],
-    image: "/images/service-procurement.jpg",
+    image: "/images/services/procurement.jpg",
   },
   {
     id: "fabrication",
@@ -87,7 +87,7 @@ export const services = [
       "Performance Reporting",
       "Continuous Improvement",
     ],
-    image: "/images/service-maintenance.jpg",
+    image: "/images/services/maintenance.jpg",
   },
   {
     id: "energy",
@@ -102,6 +102,6 @@ export const services = [
       "Carbon Capture",
       "Energy Efficiency",
     ],
-    image: "/images/service-energy.jpg",
+    image: "/images/projects/plant.jpg",
   },
 ];
