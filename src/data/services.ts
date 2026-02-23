@@ -1,52 +1,107 @@
-import { Settings, ShoppingCart, Factory, HardHat, Wrench, Zap} from 'lucide-react';
+import {
+  Settings,
+  ShoppingCart,
+  Factory,
+  HardHat,
+  Wrench,
+  Zap,
+} from "lucide-react";
 
 export const services = [
   {
-    id: 'engineering',
+    id: "engineering",
     icon: Settings,
-    title: 'Engineering & Design',
-    description: 'Our engineering team delivers innovative solutions across all disciplines.',
-    items: ['Process Technology', 'HSE Design', 'Mechanical Engineering', 'Piping Design', 'Control Systems', 'Electrical Engineering', 'Pipeline Engineering', 'Civil/Structural', '3D/4D Modeling', 'Process Simulation'],
-    image: '/images/services/fabrication.jpg'
+    title: "Engineering & Design",
+    description:
+      "Gly Engineering teams serve clients' projects across the United States of America. Engineering disciplines include process technology, HSE design, mechanical, piping, control systems, electrical, pipeline, civil, structural and architectural as well as advanced specialties such as simulation, enterprise integration, integrated automation processes, industrial cyber security, geographical information systems and interactive 3D and 4D modelling. We collaborate with client counterparts to design complex projects that may include engineering, procurement, fabrication, construction, maintenance and project management (EPCM). From the earliest stages of project design, we involve the construction and commissioning teams to provide capital cost and schedule efficiency.",
+    items: [
+      "Process Technology",
+      "HSE Design",
+      "Mechanical Engineering",
+      "Piping Design",
+      "Control Systems",
+      "Electrical Engineering",
+      "Pipeline Engineering",
+      "Civil/Structural",
+      "3D/4D Modeling",
+      "Process Simulation",
+    ],
+    image: "/images/services/fabrication.jpg",
   },
   {
-    id: 'procurement',
+    id: "procurement",
     icon: ShoppingCart,
-    title: 'Procurement',
-    description: 'Strategic supply chain management with global reach.',
-    items: ['Strategic Sourcing', 'Vendor Management', 'Material Tracking', 'Contract Management', 'Logistics Coordination', 'Quality Assurance'],
-    image: '/images/service-procurement.jpg'
+    title: "Procurement",
+    description:
+      "At Gly Engineering, we provide the best value for our clients' capital investments by leveraging our international supply chain expertise, market knowledge and global networks. In the past 10 years, our supply chain organization has worked with more than 6,000 suppliers and contractors managing a global spend of more than $60 billion in equipment, materials and services through strategic sourcing, material management, contract management and logistics functions. Regardless of project scale or location, our supply chain provides prompt access to solutions of the highest caliber.",
+    items: [
+      "Strategic Sourcing",
+      "Vendor Management",
+      "Material Tracking",
+      "Contract Management",
+      "Logistics Coordination",
+      "Quality Assurance",
+    ],
+    image: "/images/service-procurement.jpg",
   },
   {
-    id: 'fabrication',
+    id: "fabrication",
     icon: Factory,
-    title: 'Fabrication',
-    description: 'Shop-built modules optimized for transport and installation.',
-    items: ['Process Modules', 'Pipe Rack Modules', 'Equipment Skids', 'Structural Steel', 'Pressure Vessels', 'Piping Spools'],
-    image: '/images/services/fabrication.jpg'
+    title: "Fabrication",
+    description: "Gly Engineering technical experts constantly look for ways to streamline project delivery methods. Fabrication is a proven solution to improve capital efficiencies for some of the most challenging project conditions for clients across all industries. Because modularization is not a one-size-fits-all solution, we work closely with each client to develop a project execution strategy that creates the best value. Our integrated approach to fabrication solutions offers a range of options to fit clients' specific needs. Our extensive modular project experience and comprehensive knowledge of the engineering, procurement, fabrication, construction and project management process result in fabrication and construction strategies optimized for cost and schedule benefits.",
+    items: [
+      "Process Modules",
+      "Pipe Rack Modules",
+      "Equipment Skids",
+      "Structural Steel",
+      "Pressure Vessels",
+      "Piping Spools",
+    ],
+    image: "/images/services/fabrication.jpg",
   },
   {
-    id: 'construction',
+    id: "construction",
     icon: HardHat,
-    title: 'Construction',
-    description: 'Safe, predictable execution at scale across the USA.',
-    items: ['Site Preparation', 'Foundation Work', 'Structural Erection', 'Equipment Installation', 'Piping Installation', 'E&I Work'],
-    image: '/images/services/construction.png'
+    title: "Construction",
+    description: "Gly Engineering execution platform enables us to deliver complex, logistically challenging projects anywhere in the United States. With a workforce of more than 5,000 employees deployed on project execution capabilities, we deliver projects with the quality and safety our clients expect. Our expansive network of construction resources facilitates the effective mobilization of skilled construction teams and advanced methodologies around the United States. We have extensive experience with local considerations and managing culturally diverse workforces.",
+    items: [
+      "Site Preparation",
+      "Foundation Work",
+      "Structural Erection",
+      "Equipment Installation",
+      "Piping Installation",
+      "E&I Work",
+    ],
+    image: "/images/services/construction.png",
   },
   {
-    id: 'maintenance',
+    id: "maintenance",
     icon: Wrench,
-    title: 'Maintenance',
-    description: 'Comprehensive maintenance and reliability solutions.',
-    items: ['Turnaround Planning', 'Reliability Programs', 'Asset Management', 'Sustaining Capital', 'Performance Reporting', 'Continuous Improvement'],
-    image: '/images/service-maintenance.jpg'
+    title: "Maintenance",
+    description: "At Gly Engineering, we don’t just design and build some of the world’s most complex projects – we also help to sustain and maintain clients’ existing facilities. From world-class reliability consulting services to completely outsourced reliability and maintenance programs, we work with the highest safety standards to sustainably and measurably help clients improve productivity and achieve operational excellence. Supporting each stage of a sustaining capital project, we offer turnkey sustaining capital solutions, from complete program management to one-off upgrades. We bring small projects the same expertise and technical skills that we harness to build mega projects across the United States of America.",
+    items: [
+      "Turnaround Planning",
+      "Reliability Programs",
+      "Asset Management",
+      "Sustaining Capital",
+      "Performance Reporting",
+      "Continuous Improvement",
+    ],
+    image: "/images/service-maintenance.jpg",
   },
   {
-    id: 'energy',
+    id: "energy",
     icon: Zap,
-    title: 'Energy Solutions',
-    description: 'EPC for traditional and cleaner energy markets.',
-    items: ['Oil & Gas', 'Petrochemicals', 'Power Generation', 'Renewable Energy', 'Carbon Capture', 'Energy Efficiency'],
-    image: '/images/service-energy.jpg'
-  }
+    title: "Energy Solutions",
+    description: "As Gly Engineering needs are rapidly evolving, Gly Engineering is helping clients to navigate new and unprecedented challenges in the energy and chemicals industries. We provide engineering, procurement and construction (EPC) services to clients across a variety of energy markets. In addition to serving the oil, gas and petrochemical industries, we are also an essential partner in the production of safer, cleaner and sustainable energy solutions to meet the world's increasing demand. Our professional and technical solutions deliver safe, well-executed projects that are the essential building blocks of development and progress.",
+    items: [
+      "Oil & Gas",
+      "Petrochemicals",
+      "Power Generation",
+      "Renewable Energy",
+      "Carbon Capture",
+      "Energy Efficiency",
+    ],
+    image: "/images/service-energy.jpg",
+  },
 ];
