@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function TypingHero() {
   const phrases = useMemo(
-    () => ["Designed for Impact", "Built to Last", "Engineering the Future"],
+    () => ["Designed for Impact", "Built to Last", "the Future"],
     [],
   );
 

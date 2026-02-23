@@ -10,7 +10,6 @@ export default function HomePageHero({ onNavigate }: HeroProps) {
 
   return (
     <section>
-      {/* Video Background */}
       <div className="absolute inset-0">
         <video
           autoPlay
