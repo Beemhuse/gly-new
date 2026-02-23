@@ -1,5 +1,5 @@
 import TypingHero from "@/components/TypingHero";
-import { ArrowRight, Award } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface HeroProps {
   onNavigate?: (path: string) => void;
