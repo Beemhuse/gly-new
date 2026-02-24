@@ -1,13 +1,10 @@
 // First, create a new file: components/ContactRecruitmentModal.tsx
 
 import { useState } from 'react';
-import { Send, X, Phone, Mail, MapPin } from 'lucide-react';
+import { Send, X,  } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
