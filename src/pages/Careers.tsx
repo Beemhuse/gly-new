@@ -4,11 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
   Search,
-  MapPin,
   Briefcase,
   Clock,
   AlertCircle,
   Users,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import {
   Dialog,
@@ -21,61 +22,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { ContactRecruitmentModal } from "@/components/ContactRecruitmentModal";
+import { jobOpenings } from "@/data/jobs";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const jobOpenings = [
-  {
-    id: 1,
-    title: "Senior Process Engineer",
-    department: "Engineering",
-    location: "Woodinville, WA",
-    type: "Full-time",
-    description: "Lead process design for petrochemical projects.",
-  },
-  {
-    id: 2,
-    title: "Project Manager",
-    department: "Construction",
-    location: "Houston, TX",
-    type: "Full-time",
-    description: "Manage large-scale industrial construction projects.",
-  },
-  {
-    id: 3,
-    title: "Procurement Specialist",
-    department: "Procurement",
-    location: "Remote",
-    type: "Full-time",
-    description: "Manage strategic sourcing and vendor relationships.",
-  },
-  {
-    id: 4,
-    title: "Safety Coordinator",
-    department: "HSE",
-    location: "Various Sites",
-    type: "Full-time",
-    description: "Ensure safety compliance across project sites.",
-  },
-  {
-    id: 5,
-    title: "Fabrication Supervisor",
-    department: "Fabrication",
-    location: "Louisiana",
-    type: "Full-time",
-    description: "Oversee module fabrication and quality control.",
-  },
-  {
-    id: 6,
-    title: "Electrical Engineer",
-    department: "Engineering",
-    location: "Woodinville, WA",
-    type: "Full-time",
-    description: "Design electrical systems for industrial facilities.",
-  },
-];
+
+const JOBS_PER_PAGE = 10;
 
 export default function Careers() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -83,6 +36,8 @@ export default function Careers() {
     (typeof jobOpenings)[0] | null
   >(null);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const [showRecruitmentModal, setShowRecruitmentModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [applicationData, setApplicationData] = useState({
     fullName: "",
     email: "",
@@ -92,12 +47,20 @@ export default function Careers() {
   });
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const filteredJobs = jobOpenings.filter(
+  // Filter jobs based on search
+  const filteredJobs = jobOpenings?.filter(
     (j) =>
       j.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       j.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      j.location.toLowerCase().includes(searchQuery.toLowerCase()),
+      j.description.toLowerCase().includes(searchQuery.toLowerCase()),
   );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredJobs.length / JOBS_PER_PAGE);
+  const startIndex = (currentPage - 1) * JOBS_PER_PAGE;
+  const endIndex = startIndex + JOBS_PER_PAGE;
+  const currentJobs = filteredJobs.slice(startIndex, endIndex);
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -135,6 +98,15 @@ export default function Careers() {
       roleOfInterest: "",
       message: "",
     });
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of job listings
+    const jobsSection = document.getElementById("job-listings");
+    if (jobsSection) {
+      jobsSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -202,7 +174,7 @@ export default function Careers() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section id="job-listings" className="py-20 bg-white">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
@@ -210,6 +182,9 @@ export default function Careers() {
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 reveal-up">
                 Search for Careers
               </h2>
+              <p className="text-slate-500 reveal-up">
+                We have {filteredJobs.length} positions available
+              </p>
             </div>
 
             <div className="relative mb-8 reveal-up">
@@ -219,15 +194,18 @@ export default function Careers() {
               />
               <input
                 type="text"
-                placeholder="Search by title, department, or location..."
+                placeholder="Search by title, department, or description..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1);
+                }}
                 className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 transition-all"
               />
             </div>
 
-            <div className="space-y-4 reveal-up">
-              {filteredJobs.map((job) => (
+            <div className="space-y-4 reveal-up mb-8">
+              {currentJobs.map((job) => (
                 <div
                   key={job.id}
                   onClick={() => setSelectedJob(job)}
@@ -244,9 +222,6 @@ export default function Careers() {
                           <Briefcase size={14} /> {job.department}
                         </span>
                         <span className="flex items-center gap-1">
-                          <MapPin size={14} /> {job.location}
-                        </span>
-                        <span className="flex items-center gap-1">
                           <Clock size={14} /> {job.type}
                         </span>
                       </div>
@@ -256,6 +231,41 @@ export default function Careers() {
                 </div>
               ))}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8 reveal-up">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:text-sky-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-slate-500 transition-colors"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-colors ${
+                      currentPage === page
+                        ? "bg-sky-500 text-white border-sky-500"
+                        : "border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-sky-500"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="w-10 h-10 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 hover:text-sky-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-slate-500 transition-colors"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            )}
 
             {filteredJobs.length === 0 && (
               <div className="text-center py-12">
@@ -270,7 +280,13 @@ export default function Careers() {
                 Don't see a position that matches?
               </p>
               <button
-                onClick={() => setShowApplicationForm(true)}
+                onClick={() => {
+                  setApplicationData(prev => ({
+                    ...prev,
+                    roleOfInterest: "General Application"
+                  }));
+                  setShowRecruitmentModal(true);
+                }}
                 className="btn-primary"
               >
                 Submit General Application <ArrowRight size={18} />
@@ -295,9 +311,13 @@ export default function Careers() {
                   We are committed to upholding ethical hiring practices through
                   our designated recruitment team overseeing the employment
                   scheme. For further clarification regarding your job
-                  application, please <Button onClick> contact our Recruitment Team</Button>{" "}
-                  Unit.
-                 
+                  application, please{" "}
+                  <button 
+                    onClick={() => setShowRecruitmentModal(true)}
+                    className="text-amber-700 underline hover:text-amber-900 transition-colors font-medium"
+                  >
+                    contact our Recruitment Team
+                  </button>
                   .
                 </p>
               </div>
@@ -339,9 +359,6 @@ export default function Careers() {
                 <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-slate-500">
                   <span className="flex items-center gap-1">
                     <Briefcase size={16} /> {selectedJob.department}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin size={16} /> {selectedJob.location}
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock size={16} /> {selectedJob.type}
@@ -478,6 +495,12 @@ export default function Careers() {
           </form>
         </DialogContent>
       </Dialog>
+
+      <ContactRecruitmentModal 
+        open={showRecruitmentModal}
+        onOpenChange={setShowRecruitmentModal}
+        initialRole=""
+      />
     </div>
   );
 }
