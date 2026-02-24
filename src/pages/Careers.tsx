@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +75,6 @@ const jobOpenings = [
     description: "Design electrical systems for industrial facilities.",
   },
 ];
-
 
 export default function Careers() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -295,14 +294,13 @@ export default function Careers() {
                   We are committed to upholding ethical hiring practices through
                   our designated recruitment team overseeing the employment
                   scheme. For further clarification regarding your job
-                  application, please contact or visit our Recruitment Team Unit
-                  at{" "}
-                  <Link
+                  application, please contact our Recruitment Team Unit.
+                  {/* <Link
                     to={"mailto:careers@glyengineering.com"}
                     className="text-amber-700 underline"
                   >
                     careers@glyengineering.com
-                  </Link>
+                  </Link> */}
                   .
                 </p>
               </div>
