@@ -21,7 +21,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -294,13 +295,9 @@ export default function Careers() {
                   We are committed to upholding ethical hiring practices through
                   our designated recruitment team overseeing the employment
                   scheme. For further clarification regarding your job
-                  application, please contact our Recruitment Team Unit.
-                  {/* <Link
-                    to={"mailto:careers@glyengineering.com"}
-                    className="text-amber-700 underline"
-                  >
-                    careers@glyengineering.com
-                  </Link> */}
+                  application, please <Button onClick> contact our Recruitment Team</Button>{" "}
+                  Unit.
+                 
                   .
                 </p>
               </div>
