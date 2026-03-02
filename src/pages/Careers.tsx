@@ -27,7 +27,6 @@ import { jobOpenings } from "@/data/jobs";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 const JOBS_PER_PAGE = 10;
 
 export default function Careers() {
@@ -35,6 +34,7 @@ export default function Careers() {
   const [selectedJob, setSelectedJob] = useState<
     (typeof jobOpenings)[0] | null
   >(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
   const [showRecruitmentModal, setShowRecruitmentModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,7 +61,6 @@ export default function Careers() {
   const endIndex = startIndex + JOBS_PER_PAGE;
   const currentJobs = filteredJobs.slice(startIndex, endIndex);
 
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".reveal-up").forEach((el) => {
@@ -85,21 +84,51 @@ export default function Careers() {
     return () => ctx.revert();
   }, []);
 
-  const handleApplicationSubmit = (e: React.FormEvent) => {
+  const handleApplicationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Application submitted!", {
-      description: "We will respond within 48 working hours.",
-    });
-    setShowApplicationForm(false);
-    setApplicationData({
-      fullName: "",
-      email: "",
-      phone: "",
-      roleOfInterest: "",
-      message: "",
-    });
-  };
 
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch("http://localhost:6600/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formType: "careers",
+          ...applicationData,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong");
+      }
+
+      toast.success("Application submitted successfully!", {
+        description:
+          "Our recruitment team will respond within 48 working hours.",
+      });
+
+      setShowApplicationForm(false);
+
+      setApplicationData({
+        fullName: "",
+        email: "",
+        phone: "",
+        roleOfInterest: "",
+        message: "",
+      });
+    } catch (error: any) {
+      toast.error("Submission failed", {
+        description: error.message || "Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     // Scroll to top of job listings
@@ -242,21 +271,23 @@ export default function Careers() {
                 >
                   <ChevronLeft size={18} />
                 </button>
-                
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-colors ${
-                      currentPage === page
-                        ? "bg-sky-500 text-white border-sky-500"
-                        : "border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-sky-500"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ))}
-                
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <button
+                      key={page}
+                      onClick={() => handlePageChange(page)}
+                      className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-colors ${
+                        currentPage === page
+                          ? "bg-sky-500 text-white border-sky-500"
+                          : "border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-sky-500"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ),
+                )}
+
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
@@ -281,9 +312,9 @@ export default function Careers() {
               </p>
               <button
                 onClick={() => {
-                  setApplicationData(prev => ({
+                  setApplicationData((prev) => ({
                     ...prev,
-                    roleOfInterest: "General Application"
+                    roleOfInterest: "General Application",
                   }));
                   setShowRecruitmentModal(true);
                 }}
@@ -312,7 +343,7 @@ export default function Careers() {
                   our designated recruitment team overseeing the employment
                   scheme. For further clarification regarding your job
                   application, please{" "}
-                  <button 
+                  <button
                     onClick={() => setShowRecruitmentModal(true)}
                     className="text-amber-700 underline hover:text-amber-900 transition-colors font-medium"
                   >
@@ -487,8 +518,13 @@ export default function Careers() {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary flex-1">
-                  Submit Application <ArrowRight size={16} className="ml-2" />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-primary flex-1 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Application"}
+                  {!isSubmitting && <ArrowRight size={16} className="ml-2" />}
                 </button>
               </div>
             </div>
@@ -496,7 +532,7 @@ export default function Careers() {
         </DialogContent>
       </Dialog>
 
-      <ContactRecruitmentModal 
+      <ContactRecruitmentModal
         open={showRecruitmentModal}
         onOpenChange={setShowRecruitmentModal}
         initialRole=""
